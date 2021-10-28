@@ -56,4 +56,19 @@ public class UserRegistrationTest {
 		Assert.assertEquals(false, result);
 	}
 
+    /**
+     * Unit test for validating format of mobile number
+     */
+    @Test
+    public void givenPhoneNumber_WhenProper_ShouldReturnTrue() {
+        boolean result = userRegistration.phoneNumber("91 8639014024");
+        Assert.assertEquals(true, result);
+    }
+
+    @Test
+    public void givenPhoneNumber_WhenNotProper_ShouldReturnFlase() {
+        boolean result = userRegistration.phoneNumber("+91 8639014024");
+        Assert.assertEquals(false, result);
+    }
+
 }
