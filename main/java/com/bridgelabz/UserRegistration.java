@@ -3,17 +3,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Purpose  - To validate all the use case through exception handling
+ * Purpose  - To validate all the use case through Lambda Expression
  */
 
 public class UserRegistration {
 
+	@FunctionalInterface
+	interface UserDetailsValidationFI {
+		boolean validate(String x) throws UserRegistrationException;
+	}
 
-
-	// Created a method to validate first name
-	public boolean firstName(String firstName) throws UserRegistrationException {
+	// Created a method to validate first name using lambda expression
+	UserDetailsValidationFI validateFirstName = firstName -> {
 		if (firstName == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
+			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (firstName.length() == 0) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
 		}
@@ -23,12 +26,12 @@ public class UserRegistration {
 			Matcher matcher = pattern.matcher(firstName);
 			return matcher.matches();
 		}
-	}
+	};
 
-	// Created a method to validate last name
-	public boolean lastName(String lastName) throws UserRegistrationException {
+	// Created a method to validate last name using lambda expression
+	UserDetailsValidationFI validateLastName = lastName -> {
 		if (lastName == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
+			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (lastName.length() == 0) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
 		}
@@ -36,12 +39,12 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(lastName);
 		return matcher.matches();
-	}
+	};
 
-	// Created a method to validate email address
-	public boolean email(String email) throws UserRegistrationException {
+	// Created a method to validate email address using lambda expression
+	UserDetailsValidationFI validateEmail = email -> {
 		if (email == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
+			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (email.length() == 0) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
 		}
@@ -49,12 +52,12 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
-	}
+	};
 
-	// Created a method to validate phone number
-	public boolean phoneNumber(String phoneNumber) throws UserRegistrationException {
+	// Created a method to validate phone number using lambda expression
+	UserDetailsValidationFI validatePhoneNumber = phoneNumber -> {
 		if (phoneNumber == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
+			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (phoneNumber.length() == 0) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
 		}
@@ -62,49 +65,10 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(phoneNumber);
 		return matcher.matches();
-	}
+	};
 
-	// Created a method to validate password according to rule 1
-	public boolean passwordRule1(String password) throws UserRegistrationException {
-		if (password == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
-		} else if (password.length() == 0) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
-		}
-		String regex = "^[0-9a-zA-Z!,@#$&*().]{8,}$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(password);
-		return matcher.matches();
-	}
-
-	// Created a method to validate password according to rule 2
-	public boolean passwordRule2(String password) throws UserRegistrationException {
-		if (password == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
-		} else if (password.length() == 0) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
-		}
-		String regex = "^(?=.*[A-Z]){1}(?=.*[a-z]).{8,}$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(password);
-		return matcher.matches();
-	}
-
-	// Created a method to validate password according to rule 3
-	public boolean passwordRule3(String password) throws UserRegistrationException {
-		if (password == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
-		} else if (password.length() == 0) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
-		}
-		String regex = "^(?=.*[A-Z]){1}(?=.*[a-z])(?=.*[0-9]).{8,}$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(password);
-		return matcher.matches();
-	}
-
-	// Created a method to validate password according to rule 4
-	public boolean passwordRule4(String password) throws UserRegistrationException {
+	// Created a method to validate password according to all the rules by using lambda expression
+	UserDetailsValidationFI validatePassword = password -> {
 		if (password == null) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (password.length() == 0) {
@@ -114,12 +78,12 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(password);
 		return matcher.matches();
-	}
+	};
 
-	// Created a method to validate all the emails in the list
-	public boolean emailIdValidator(String emailId) throws UserRegistrationException {
+	// Created a method to validate all the emails in the list using lambda expression
+	UserDetailsValidationFI validateEmailId = emailId -> {
 		if (emailId == null) {
-			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, "Input can't be Null");
+			throw new UserRegistrationException(UserRegistrationException.ExceptionType.NULL, " Input can't be Null");
 		} else if (emailId.length() == 0) {
 			throw new UserRegistrationException(UserRegistrationException.ExceptionType.EMPTY, "Invalid Input");
 		}
@@ -127,5 +91,7 @@ public class UserRegistration {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(emailId);
 		return matcher.matches();
-	}
+	};
+
+
 }
