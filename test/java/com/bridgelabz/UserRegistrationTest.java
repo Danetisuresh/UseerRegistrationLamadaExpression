@@ -97,18 +97,44 @@ public class UserRegistrationTest {
 		Assert.assertEquals(false, result);
 	}
 
-    /**
-     * Unit test for validating password with atleast one numeric number
+	/**
+	 * Unit test for validating password with atleast one numeric number
+	 */
+	@Test
+	public void givenPasswordRule3_WhenProper_ShouldReturnTrue() {
+		boolean result = userRegistration.passwordRule3("123Aab123");
+		Assert.assertEquals(true, result);
+	}
+	@Test
+	public void givenPasswordRule3_WhenNotProper_ShouldReturnFalse() {
+		boolean result = userRegistration.passwordRule3("123456789");
+		Assert.assertEquals(false, result);
+	}
+
+	/**
+	 * Unit test for validating password with exactly one special character
+	 */
+	@Test
+	public void givenPasswordRule4_WhenProper_ShouldReturnTrue() {
+		boolean result = userRegistration.passwordRule4("1234@Abc");
+		Assert.assertEquals(true, result);
+	}
+	@Test
+	public void givenPasswordRule4_WhenNotProper_ShouldReturnFalse() {
+		boolean result = userRegistration.passwordRule4("akdj@ds@A");
+		Assert.assertEquals(false, result);
+	}
+	/**
+     * Unit test for validating email sequence
      */
     @Test
-    public void givenPasswordRule3_WhenProper_ShouldReturnTrue() {
-        boolean result = userRegistration.passwordRule3("123Aab123");
+    public void givenEmail1_WhenProper_ShouldReturnTrue() {
+        boolean result = userRegistration.emailIdValidator("abc.100@abc.com.au");
         Assert.assertEquals(true, result);
     }
     @Test
-    public void givenPasswordRule3_WhenNotProper_ShouldReturnFalse() {
-        boolean result = userRegistration.passwordRule3("123456789");
+    public void givenEmail1_WhenNotProper_ShouldReturnFalse() {
+        boolean result = userRegistration.emailIdValidator("abc()*@gmail.com");
         Assert.assertEquals(false, result);
     }
-
 }
