@@ -3,7 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Purpose  - As a User need to enter a valid password with minimum 8 character
+ * Purpose  - As a User need to enter a valid password with atleast one upper case
  */
 
 public class UserRegistration {
@@ -44,15 +44,24 @@ public class UserRegistration {
 		Matcher matcher = pattern.matcher(phoneNumber);
 		return matcher.matches();
 	}
-    /*
+	/*
     Created a method to validate password with minimum 8 character
-    */
-    public boolean password(String password) {
-        String regex = "^[0-9a-zA-Z!,@#$&*().]{8,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
-    }
+	 */
+	public boolean password(String password) {
+		String regex = "^[0-9a-zA-Z!,@#$&*().]{8,}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(password);
+		return matcher.matches();
+	}
+	/*
+    Created a method to validate password with atleast one upper case
+	 */
+	public boolean passwordRule2(String password) {
+		String regex = "^(?=.*[A-Z]){1}(?=.*[a-z]).{8,}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(password);
+		return matcher.matches();
+	}
 
 
 }
